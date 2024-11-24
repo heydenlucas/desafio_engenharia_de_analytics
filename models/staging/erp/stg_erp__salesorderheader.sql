@@ -1,7 +1,7 @@
 with 
     source_salesorderheader as (
         select 
-            cast(SALESORDERID as int) as pk_salesorderheader
+            cast(SALESORDERID as int) as pk_orderheader
             --###############################################
             , cast(CUSTOMERID as int) as fk_customer
             , cast(SALESPERSONID as int) as fk_sales_person
@@ -25,7 +25,7 @@ with
             , cast(CREDITCARDAPPROVALCODE as varchar) as credit_card_approval_code
             , cast(SUBTOTAL as numeric(18,6)) as subtotal
             , cast(TAXAMT as numeric(18,6)) as tax_amt
-            , cast(FREIGHT as numeric(18,6)) as prorated_shipping
+            , cast(FREIGHT as numeric(18,6)) as freight
             , cast(TOTALDUE as numeric(18,6)) as total_cost
             , cast(COMMENT as varchar) as comment
             --###############################################
