@@ -7,7 +7,9 @@ sources:
     schema: RAW_ADVENTURE_WORKS   
     tables:
       - name: SalesOrderHeader
-        description: 'Tabela com dados das transações.'
+        description: 'Table with data of the all orders.'
+      - name: SalesOrderDetail
+        description: 'Table with details of each order.'
       - name: Product
       - name: ProductSubcategory
       - name: ProductCategory
