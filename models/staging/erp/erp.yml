@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: erp_adventure_works
+    description: 'Essa é a fonte do sistema ERP da Adventure Works com dados de vendas e transações. Esse projeto será avaliado como método de emissão da certificação de Engenharia de Analytics da Indicium.'
+    database: FEA24_9
+    schema: RAW_ADVENTURE_WORKS   
+    tables:
+      - name: SalesOrderHeader
+        description: 'Tabela com dados das transações.'
+      - name: Product
+      - name: ProductSubcategory
+      - name: ProductCategory
+      - name: SalesOrderHeaderSalesReason
+      - name: SalesReason
+      - name: CreditCard
+      - name: Address
+      - name: StateProvince
+      - name: CountryRegion
+      - name: Customer
+      - name: Person
+      - name: Store
+
