@@ -16,6 +16,7 @@ sources:
       - name: SalesOrderHeaderSalesReason
       - name: SalesReason
       - name: CreditCard
+      - name: PersonCreditCard
       - name: Address
       - name: StateProvince
       - name: CountryRegion
