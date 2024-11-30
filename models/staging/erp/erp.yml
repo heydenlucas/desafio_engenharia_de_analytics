@@ -23,4 +23,9 @@ sources:
       - name: Customer
       - name: Person
       - name: Store
+      - name: Employee
+      - name: Shift
+      - name: EmployeeDepartmentHistory
+      - name: Department 
+
 

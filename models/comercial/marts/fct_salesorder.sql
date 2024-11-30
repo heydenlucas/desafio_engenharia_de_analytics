@@ -1,5 +1,13 @@
 with 
-    location as (
+    creditcard as (
+        select *
+        from {{ ref('dim_creditcard') }}
+    )
+    , employee as (
+        select *
+        from {{ ref('dim_employee') }}
+    )
+    , location as (
         select 
             PK_SHIP_TO_ADDRESS
             , FULL_ADDRESS
@@ -46,7 +54,7 @@ with
             id_SALESORDER
             , AGG_SALESREASON
             , AGG_SALESTYPE
-        from {{ ref('int_salesreason') }}
+        from {{ ref('dim_salesreason') }}
     )
     , client as (
         select 
