@@ -2,7 +2,7 @@ with
     source_salesorderdetail as (
         select 
             cast(SALESORDERDETAILID as int) as pk_order_detail
-            , cast(SALESORDERID as int) as fk_orderheader
+            , cast(SALESORDERID as int) as fk_salesorder
             , cast(PRODUCTID as int) as fk_product
             , cast(SPECIALOFFERID as int) as fk_special_offer
             , cast(CARRIERTRACKINGNUMBER as varchar) as fk_traking_number

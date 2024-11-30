@@ -1,7 +1,14 @@
-with
-    salesorderheader as (
+with 
+    location as (
         select 
-            PK_ORDERHEADER
+            PK_SHIP_TO_ADDRESS
+            , FULL_ADDRESS
+        from {{ ref('dim_location') }}
+    )
+    , order_details as (
+        select 
+            PK_ORDER_DETAIL
+            , fk_salesorder
             , FK_CUSTOMER
             , FK_SALES_PERSON
             , FK_TERRITORY
@@ -10,136 +17,103 @@ with
             , FK_SHIP_METHOD
             , FK_CREDIT_CARD
             , FK_CURRENCY_RATED
+            , FK_PRODUCT
+            , FK_SPECIAL_OFFER
+            , FK_TRAKING_NUMBER
+            --#############################
             , ORDER_DATE
             , DUE_DATE
             , SHIP_DATE
             , MODIFIED_DATE
+            --#############################
             , REVISION_NUMBER
             , STATUS
             , ORDER_FLG
             , PURCHASE_ORDER_NUMBER
             , ACCOUNT_NUMBER
             , CREDIT_CARD_APPROVAL_CODE
-            , SUBTOTAL
-            , TAX_AMT
-            , FREIGHT
-            , TOTAL_COST
             , COMMENT
-        from {{ ref('stg_erp__salesorderheader') }}
+            --############################
+            -- Metrics
+            , gross_subtotal
+            , net_subtotal
+            , prorated_freight
+            , prorated_tax
+        from {{ ref('int_orderdetails') }}
     )
-
-    , salesorderdetail as (
-        select
-            PK_ORDER_DETAIL
-            , FK_ORDERHEADER
-            , FK_PRODUCT
-            , FK_SPECIAL_OFFER
-            , FK_TRAKING_NUMBER
-            , MODIFIED_DATE
-            , ORDER_QUANTITY
-            , UNIT_PRICE
-            , UNIT_PRICE_DESC
-        from {{ ref('stg_erp__salesorderdetail') }}
+    , sales_reason as (
+        select 
+            id_SALESORDER
+            , AGG_SALESREASON
+            , AGG_SALESTYPE
+        from {{ ref('int_salesreason') }}
     )
-
+    , client as (
+        select 
+            SK_CLIENTE
+            , PK_CLIENT
+            , FK_PERSON
+            , FK_STORE
+            , FK_TERRITORY
+            , PERSON_NAME
+            , PERSON_TYPE
+            , STORE_NAME
+        from {{ ref('dim_client') }}
+    )
     , joined as (
-        select
-            -- SalesOrderHeader
-            PK_ORDERHEADER
-            , salesorderheader.FK_CUSTOMER
-            , salesorderheader.FK_SALES_PERSON
-            , salesorderheader.FK_TERRITORY
-            , salesorderheader.FK_BILL_TO_ADDRESS
-            , salesorderheader.FK_SHIP_TO_ADDRESS
-            , salesorderheader.FK_SHIP_METHOD
-            , salesorderheader.FK_CREDIT_CARD
-            , salesorderheader.FK_CURRENCY_RATED
-            , salesorderheader.ORDER_DATE
-            , salesorderheader.DUE_DATE
-            , salesorderheader.SHIP_DATE
-            --, salesorderheader.MODIFIED_DATE
-            , salesorderheader.REVISION_NUMBER
-            , salesorderheader.STATUS
-            , salesorderheader.ORDER_FLG
-            , salesorderheader.PURCHASE_ORDER_NUMBER
-            , salesorderheader.ACCOUNT_NUMBER
-            , salesorderheader.CREDIT_CARD_APPROVAL_CODE
-            , salesorderheader.SUBTOTAL
-            , salesorderheader.TAX_AMT
-            , salesorderheader.FREIGHT
-            , salesorderheader.TOTAL_COST
-            , salesorderheader.COMMENT
-            -- SalesOrderDetail
-            , salesorderdetail.PK_ORDER_DETAIL
-            , salesorderdetail.FK_ORDERHEADER
-            , salesorderdetail.FK_PRODUCT
-            , salesorderdetail.FK_SPECIAL_OFFER
-            , salesorderdetail.FK_TRAKING_NUMBER
-            , salesorderdetail.MODIFIED_DATE
-            , salesorderdetail.ORDER_QUANTITY
-            , salesorderdetail.UNIT_PRICE
-            , salesorderdetail.UNIT_PRICE_DESC
-        from salesorderdetail
-        left join salesorderheader on salesorderheader.pk_orderheader = salesorderdetail.fk_orderheader 
+        select 
+              order_details.PK_ORDER_DETAIL
+            , order_details.fk_salesorder
+            , order_details.FK_CUSTOMER
+            , order_details.FK_SALES_PERSON
+            , order_details.FK_TERRITORY
+            , order_details.FK_BILL_TO_ADDRESS
+            , order_details.FK_SHIP_TO_ADDRESS
+            , order_details.FK_SHIP_METHOD
+            , order_details.FK_CREDIT_CARD
+            , order_details.FK_CURRENCY_RATED
+            , order_details.FK_PRODUCT
+            , order_details.FK_SPECIAL_OFFER
+            , order_details.FK_TRAKING_NUMBER
+            , client.FK_PERSON
+            , client.FK_STORE
+            --#############################
+            , order_details.ORDER_DATE
+            , order_details.DUE_DATE
+            , order_details.SHIP_DATE
+            , order_details.MODIFIED_DATE
+            --#############################
+            , order_details.REVISION_NUMBER
+            , order_details.STATUS
+            , order_details.ORDER_FLG
+            , order_details.PURCHASE_ORDER_NUMBER
+            , order_details.ACCOUNT_NUMBER
+            , order_details.CREDIT_CARD_APPROVAL_CODE
+            , order_details.COMMENT
+            --############################
+            -- Metrics
+            , order_details.gross_subtotal
+            , order_details.net_subtotal
+            , order_details.prorated_freight
+            , order_details.prorated_tax
+            -----------------------------------------
+            --, sales_reason.id_salesorder
+            , sales_reason.AGG_SALESREASON
+            , sales_reason.AGG_SALESTYPE
+            -----------------------------------------
+            , client.PERSON_NAME
+            , client.PERSON_TYPE
+            , client.STORE_NAME
+            -----------------------------------------
+            , location.FULL_ADDRESS
+
+
+        from order_details
+        left join sales_reason on sales_reason.id_salesorder = ORDER_DETAILS.fk_salesorder
+        left join client on client.PK_CLIENT = ORDER_DETAILS.FK_CUSTOMER
+        left join location on location.PK_SHIP_TO_ADDRESS = order_details.FK_SHIP_TO_ADDRESS
     )
 
-    , metrics as (
-        select
-            *
-            -- , PK_ORDERHEADER
-            -- , FK_CUSTOMER
-            -- , FK_SALES_PERSON
-            -- , FK_TERRITORY
-            -- , FK_BILL_TO_ADDRESS
-            -- , FK_SHIP_TO_ADDRESS
-            -- , FK_SHIP_METHOD
-            -- , FK_CREDIT_CARD
-            -- , FK_CURRENCY_RATED
-            -- , FK_ORDERHEADER
-            -- , FK_PRODUCT
-            -- , FK_SPECIAL_OFFER
-            -- , FK_TRAKING_NUMBER
-            -- , ORDER_DATE
-            -- , DUE_DATE
-            -- , SHIP_DATE
-            -- , MODIFIED_DATE
-            -- , REVISION_NUMBER
-            -- , STATUS
-            -- , ORDER_FLG
-            -- , PURCHASE_ORDER_NUMBER
-            -- , ACCOUNT_NUMBER
-            -- , CREDIT_CARD_APPROVAL_CODE
-            
-            -- , TAX_AMT
-            -- , FREIGHT
-            -- , TOTAL_COST
-            -- , COMMENT
-            -- --, PK_ORDER_DETAIL
-            -- , ORDER_QUANTITY
-            -- , UNIT_PRICE
-            -- , UNIT_PRICE_DESC
 
-            --##############################################
-            , (UNIT_PRICE * ORDER_QUANTITY) as gross_subtotal
-            , (UNIT_PRICE * ORDER_QUANTITY - (1-UNIT_PRICE_DESC)) as net_subtotal
-            , FREIGHT / (count(*) over(partition by PK_ORDERHEADER)) as prorated_freight
-
-        from joined
-    )
-
-select 
-    pk_orderheader
-    , pk_order_detail
-    , subtotal
-    , gross_subtotal
-    , prorated_freight
-    , freight
-from metrics
-
-
-
--- select count(*)
--- from {{ ref('stg_erp__salesorderheader') }}
-
--- select count(*)
--- from {{ ref('stg_erp__salesorderdetail') }}
+select *
+from joined
