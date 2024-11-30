@@ -1,7 +1,7 @@
 with 
     source_salesorderheader as (
         select 
-            cast(SALESORDERID as int) as pk_orderheader
+            cast(SALESORDERID as int) as pk_salesorder
             --###############################################
             , cast(CUSTOMERID as int) as fk_customer
             , cast(SALESPERSONID as int) as fk_sales_person
@@ -18,7 +18,15 @@ with
             , cast(MODIFIEDDATE as date) as modified_date
             --###############################################
             , cast(REVISIONNUMBER as int) as revision_number
-            , cast(STATUS as int) as status
+            , CASE 
+                WHEN Status = 1 THEN 'Em processo'
+                WHEN Status = 2 THEN 'Aprovado'
+                WHEN Status = 3 THEN 'Em falta'
+                WHEN Status = 4 THEN 'Rejeitado'
+                WHEN Status = 5 THEN 'Enviado'
+                WHEN Status = 6 THEN 'Cancelado'
+                ELSE 'Status desconhecido' -- Para tratar casos não mapeados
+              END AS Status
             , cast(ONLINEORDERFLAG as boolean) as order_flg
             , cast(PURCHASEORDERNUmber as varchar) as purchase_order_number
             , cast(ACCOUNTNUMBER as varchar) as account_number

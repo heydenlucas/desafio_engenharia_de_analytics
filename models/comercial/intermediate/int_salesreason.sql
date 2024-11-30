@@ -30,6 +30,25 @@ with
         left join salesorderheadersalesreason 
             on salesreason.PK_SALESREASON = salesorderheadersalesreason.FK_SALESREASON
     )
+    , agg_salesreason AS (
+        SELECT 
+            {{ dbt_utils.generate_surrogate_key(['FK_SALESORDER']) }} AS sk_SALESREASON
+            , FK_SALESORDER AS ID_SALESORDER
+            , LISTAGG(SALESREASON_NAME, ', ') AS AGG_SALESREASON
+            , LISTAGG(SALESREASON_TYPE, ', ') AS AGG_SALESTYPE
+        FROM 
+            joined
+        GROUP BY 
+            FK_SALESORDER
+)
 
-select *
-from joined
+SELECT *
+FROM agg_salesreason
+
+
+-- Entender se é necessário agregar o motivo da venda e ver como deve-se inserí-lo corretamente na tabela Fato
+
+-- select 
+--     count(distinct(FK_SALESORDER)) as ID
+--     , count(PK_SALESREASON) as PK
+-- from joined

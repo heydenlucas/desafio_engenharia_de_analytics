@@ -45,8 +45,7 @@ with
             on product_subcategory.pk_product_subcategory = product.fk_subcategory
         left join
             product_category
-            on product_category.pk_product_category
-            = product_subcategory.fk_product_category
+            on product_category.pk_product_category = product_subcategory.fk_product_category
 
     )
 

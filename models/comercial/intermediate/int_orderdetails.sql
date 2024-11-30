@@ -1,7 +1,7 @@
 with
     salesorderheader as (
         select 
-            PK_ORDERHEADER
+            pk_salesorder
             , FK_CUSTOMER
             , FK_SALES_PERSON
             , FK_TERRITORY
@@ -29,9 +29,9 @@ with
     )
 
     , salesorderdetail as (
-        select
+        select 
             PK_ORDER_DETAIL
-            , FK_ORDERHEADER
+            , fk_salesorder
             , FK_PRODUCT
             , FK_SPECIAL_OFFER
             , FK_TRAKING_NUMBER
@@ -45,7 +45,7 @@ with
     , joined as (
         select
             -- SalesOrderHeader
-            PK_ORDERHEADER
+            salesorderheader.pk_salesorder as fk_salesorder
             , salesorderheader.FK_CUSTOMER
             , salesorderheader.FK_SALES_PERSON
             , salesorderheader.FK_TERRITORY
@@ -71,7 +71,7 @@ with
             , salesorderheader.COMMENT
             -- SalesOrderDetail
             , salesorderdetail.PK_ORDER_DETAIL
-            , salesorderdetail.FK_ORDERHEADER
+            --, salesorderdetail.fk_salesorder
             , salesorderdetail.FK_PRODUCT
             , salesorderdetail.FK_SPECIAL_OFFER
             , salesorderdetail.FK_TRAKING_NUMBER
@@ -80,14 +80,14 @@ with
             , salesorderdetail.UNIT_PRICE
             , salesorderdetail.UNIT_PRICE_DESC
         from salesorderdetail
-        left join salesorderheader on salesorderheader.pk_orderheader = salesorderdetail.fk_orderheader 
+        left join salesorderheader on salesorderheader.pk_salesorder = salesorderdetail.fk_salesorder
     )
 
 
     , metrics as (
         select
-            PK_ORDERHEADER
-            , PK_ORDER_DETAIL
+            PK_ORDER_DETAIL
+            , fk_salesorder
             , FK_CUSTOMER
             , FK_SALES_PERSON
             , FK_TERRITORY
@@ -96,7 +96,7 @@ with
             , FK_SHIP_METHOD
             , FK_CREDIT_CARD
             , FK_CURRENCY_RATED
-            , FK_ORDERHEADER
+            --, fk_salesorder
             , FK_PRODUCT
             , FK_SPECIAL_OFFER
             , FK_TRAKING_NUMBER
@@ -117,7 +117,7 @@ with
             -- Metrics
             , (UNIT_PRICE * ORDER_QUANTITY) as gross_subtotal
             , (UNIT_PRICE * ORDER_QUANTITY - (1-UNIT_PRICE_DESC)) as net_subtotal
-            , FREIGHT / (count(*) over(partition by PK_ORDERHEADER)) as prorated_freight
+            , FREIGHT / (count(*) over(partition by fk_salesorder)) as prorated_freight
             , round(TAX_AMT * (gross_subtotal/subtotal),4) as prorated_tax
 
         from joined
