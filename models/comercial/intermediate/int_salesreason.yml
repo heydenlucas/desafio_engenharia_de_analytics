@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: int_salesreason
+    description: Tabela que contém informações sobre os motivos de vendas associados a pedidos.
+    columns:
+      - name: SK_SALESREASON
+        description: Chave primária que identifica de forma única cada motivo de venda.
+        tests:
+          - unique
+          - not_null
+
+      - name: ID_SALESORDER
+        description: Identificador do pedido de venda associado ao motivo.
+
+      - name: AGG_SALESREASON
+        description: Razões da venda agregadas que são associadas ao pedido.
+
+      - name: AGG_SALESTYPE
+        description: Tipos da venda agregados que são associados ao pedido.

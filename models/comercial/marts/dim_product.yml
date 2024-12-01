@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: dim_product
+    description: Tabela dimensão que contém informações sobre produtos.
+    columns:
+      - name: PK_PRODUCT
+        description: Chave primária do produto, utilizada para identificação única.
+        tests:
+          - unique
+          - not_null
+
+      - name: PK_PD_NUMBER
+        description: Número identificador do produto, que pode ser utilizado para referência interna.
+
+      - name: FK_SUBCATEGORY
+        description: Chave estrangeira que referencia a subcategoria à qual o produto pertence.
+
+      - name: FK_MODEL
+        description: Chave estrangeira que referencia o modelo do produto.
+
+      - name: PRODUCT_MODIFIEDDATE
+        description: Data da última modificação das informações do produto.
+
+      - name: CATEGORY_MODIFIEDDATE
+        description: Data da última modificação das informações da categoria do produto.
+
+      - name: SUBCATEGORY_MODIFIEDDATE
+        description: Data da última modificação das informações da subcategoria do produto.
+
+      - name: PRODUCT_START_SELL_DT
+        description: Data de início da venda do produto.
+
+      - name: PRODUCT_END_SELL_DT
+        description: Data de término da venda do produto.
+
+      - name: PRODUCT_NAME
+        description: Nome do produto.
+
+      - name: CATEGORY_NAME
+        description: Nome da categoria à qual o produto pertence.
+
+      - name: SUBCATEGORY_NAME
+        description: Nome da subcategoria à qual o produto pertence.

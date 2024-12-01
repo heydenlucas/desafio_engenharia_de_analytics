@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: int_location
+    description: Tabela intermediária que contém informações sobre endereços e localizações.
+    columns:
+      - name: PK_ADDRESS
+        description: Chave primária que identifica de forma única cada registro de endereço.
+        tests:
+          - unique
+          - not_null
+
+      - name: CITY
+        description: Nome da cidade associada ao endereço.
+
+      - name: ADDRESS
+        description: Rua e número do endereço.
+
+      - name: POSTAL_CODE
+        description: Código postal associado ao endereço.
+
+      - name: STATE_NAME
+        description: Nome do estado associado ao endereço.
+
+      - name: COUNTRY_NAME
+        description: Nome do país associado ao endereço.
+
+      - name: FULL_ADDRESS
+        description: Endereço completo, incluindo rua, cidade, estado e código postal.

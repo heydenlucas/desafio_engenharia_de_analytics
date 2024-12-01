@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: dim_creditcard
+    description: Tabela dimensão que contém informações sobre os cartões de crédito dos clientes.
+    columns:
+      - name: SK_CREDITCARD
+        description: Chave substituta única para cada cartão de crédito.
+        tests:
+          - unique
+          - not_null
+
+      - name: PK_CREDIT_CARD
+        description: Chave primária do cartão de crédito, utilizada para identificação única.
+        tests:
+          - unique
+          - not_null
+
+      - name: FK_PERSON
+        description: Chave estrangeira que referencia a tabela de pessoas.
+
+      - name: CREDITCARD_MODIFIEDDATE
+        description: Data da última modificação das informações do cartão de crédito.
+
+      - name: PERSON_CREDITCARD_MODIFIEDDATE
+        description: Data da última modificação das informações do cartão de crédito associadas à pessoa.
+
+      - name: CARD_TYPE
+        description: Tipo de cartão de crédito (por exemplo, Visa, MasterCard).
+
+      - name: CARD_NUMBER
+        description: Número do cartão de crédito.
+
+      - name: CARD_EXP_MONTH
+        description: Mês de expiração do cartão de crédito.
+
+      - name: CARD_EXP_YEAR
+        description: Ano de expiração do cartão de crédito.
+
+      - name: PERSON_MODIFIED_DATE
+        description: Data da última modificação das informações da pessoa associada ao cartão de crédito.
+
+      - name: PERSON_TYPE
+        description: Tipo de pessoa (por exemplo, física ou jurídica).
+
+      - name: PERSON_NAME
+        description: Nome completo da pessoa associada ao cartão de crédito.

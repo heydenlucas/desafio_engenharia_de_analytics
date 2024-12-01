@@ -1,0 +1,90 @@
+version: 2
+
+models:
+  - name: fct_salesorder
+    description: Tabela fato que contém detalhes sobre pedidos de venda, incluindo informações sobre
+                clientes, produtos e transações.
+    columns:
+      - name: PK_ORDER_DETAIL
+        description: Chave primária que identifica de forma única cada detalhe do pedido.
+        tests:
+          - unique
+          - not_null
+
+      - name: FK_SALESORDER
+        description: Chave estrangeira que referencia o pedido de venda associado.
+
+      - name: FK_CUSTOMER
+        description: Chave estrangeira que referencia o cliente que fez o pedido.
+
+      - name: FK_SALES_PERSON
+        description: Chave estrangeira que referencia o vendedor responsável pela venda.
+
+      - name: FK_TERRITORY
+        description: Chave estrangeira que referencia o território associado à venda.
+
+      - name: FK_BILL_TO_ADDRESS
+        description: Chave estrangeira que referencia o endereço de cobrança do cliente.
+
+      - name: FK_SHIP_TO_ADDRESS
+        description: Chave estrangeira que referencia o endereço de entrega do pedido.
+
+      - name: FK_SHIP_METHOD
+        description: Chave estrangeira que referencia o método de envio utilizado para o pedido.
+
+      - name: FK_CREDIT_CARD
+        description: Chave estrangeira que referencia o cartão de crédito utilizado para o pagamento.
+
+      - name: FK_CURRENCY_RATED
+        description: Chave estrangeira que referencia a moeda utilizada na transação.
+
+      - name: FK_PRODUCT
+        description: Chave estrangeira que referencia o produto associado ao pedido.
+
+      - name: FK_SPECIAL_OFFER
+        description: Chave estrangeira que referencia uma oferta especial aplicada ao pedido.
+
+      - name: FK_TRAKING_NUMBER
+        description: Chave estrangeira que referencia o número de rastreamento do pedido.
+
+      - name: FK_PERSON
+        description: Chave estrangeira que referencia a pessoa que fez o pedido.
+
+      - name: FK_STORE
+        description: Chave estrangeira que referencia a loja onde o pedido foi realizado.
+
+      - name: ORDER_DATE
+        description: Data em que o pedido foi realizado.
+
+      - name: SHIP_DATE
+        description: Data em que o pedido foi enviado.
+
+      - name: GROSS_SUBTOTAL
+        description: Subtotal bruto do pedido antes de impostos e frete.
+
+      - name: NET_SUBTOTAL
+        description: Subtotal líquido do pedido após deduções.
+
+      - name: PRORATED_FREIGHT
+        description: Custo do frete proporcional ao pedido.
+
+      - name: PRORATED_TAX
+        description: Imposto proporcional aplicado ao pedido.
+
+      - name: AGG_SALESREASON
+        description: Razões da venda agregadas que são associadas ao pedido.
+
+      - name: AGG_SALESTYPE
+        description: Tipos da venda agregados que são associados ao pedido.
+
+      - name: PERSON_NAME
+        description: Nome da pessoa que fez o pedido.
+
+      - name: PERSON_TYPE
+        description: Tipo da pessoa que fez o pedido (exemplo; cliente, funcionário).
+
+      - name: STORE_NAME
+        description: Nome da loja onde o pedido foi realizado.
+
+      - name: FULL_ADDRESS
+        description: Endereço completo do cliente.

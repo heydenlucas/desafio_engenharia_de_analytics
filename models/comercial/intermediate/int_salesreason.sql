@@ -44,11 +44,3 @@ with
 
 SELECT *
 FROM agg_salesreason
-
-
--- Entender se é necessário agregar o motivo da venda e ver como deve-se inserí-lo corretamente na tabela Fato
-
--- select 
---     count(distinct(FK_SALESORDER)) as ID
---     , count(PK_SALESREASON) as PK
--- from joined

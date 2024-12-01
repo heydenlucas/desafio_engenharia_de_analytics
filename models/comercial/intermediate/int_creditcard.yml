@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: int_creditcard
+    description: Tabela de intermediária que contém informações sobre cartões de crédito associados a pessoas.
+    columns:
+      - name: SK_CREDITCARD
+        description: Chave substituta que identifica de forma única cada registro de cartão de crédito.
+        tests:
+          - unique
+          - not_null
+
+      - name: PK_CREDIT_CARD
+        description: Chave primária que identifica de forma única cada cartão de crédito.
+
+      - name: FK_PERSON
+        description: Chave estrangeira que referencia a pessoa associada ao cartão de crédito.
+
+      - name: CREDITCARD_MODIFIEDDATE
+        description: Data da última modificação do registro do cartão de crédito.
+
+      - name: PERSON_CREDITCARD_MODIFIEDDATE
+        description: Data da última modificação do cartão de crédito associado à pessoa.
+
+      - name: CARD_TYPE
+        description: Tipo de cartão de crédito (ex; Distinguish, Vista, etc.).
+
+      - name: CARD_NUMBER
+        description: Número do cartão de crédito.
+
+      - name: CARD_EXP_MONTH
+        description: Mês de expiração do cartão de crédito.
+
+      - name: CARD_EXP_YEAR
+        description: Ano de expiração do cartão de crédito.
+
+      - name: PERSON_MODIFIED_DATE
+        description: Data da última modificação do registro da pessoa associada ao cartão.
+
+      - name: PERSON_TYPE
+        description: Tipo da pessoa associada ao cartão de crédito (ex; cliente, funcionário).
+
+      - name: PERSON_NAME
+        description: Nome da pessoa associada ao cartão de crédito.

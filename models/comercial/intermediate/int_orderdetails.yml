@@ -1,0 +1,94 @@
+version: 2
+
+models:
+  - name: int_orderdetails
+    description: Tabela de intermediária de detalhes do pedido que contém
+                 informações sobre cada item em um pedido de venda.
+    columns:
+      - name: PK_ORDER_DETAIL
+        description: Chave primária que identifica de forma única cada parte do pedido.
+        tests:
+          - unique
+          - not_null
+
+      - name: FK_SALESORDER
+        description: Chave estrangeira que referencia o pedido de venda associado.
+
+      - name: FK_CUSTOMER
+        description: Chave estrangeira que referencia o cliente que fez o pedido.
+
+      - name: FK_SALES_PERSON
+        description: Chave estrangeira que referencia o vendedor responsável pela venda.
+
+      - name: FK_TERRITORY
+        description: Chave estrangeira que referencia o território associado à venda.
+
+      - name: FK_BILL_TO_ADDRESS
+        description: Chave estrangeira que referencia o endereço de cobrança do cliente.
+
+      - name: FK_SHIP_TO_ADDRESS
+        description: Chave estrangeira que referencia o endereço de entrega do pedido.
+
+      - name: FK_SHIP_METHOD
+        description: Chave estrangeira que referencia o método de envio utilizado para o pedido.
+
+      - name: FK_CREDIT_CARD
+        description: Chave estrangeira que referencia o cartão de crédito utilizado para o pagamento.
+
+      - name: FK_CURRENCY_RATED
+        description: Chave estrangeira que referencia a moeda utilizada na transação.
+
+      - name: FK_PRODUCT
+        description: Chave estrangeira que referencia o produto associado ao pedido.
+
+      - name: FK_SPECIAL_OFFER
+        description: Chave estrangeira que referencia uma oferta especial aplicada ao pedido.
+
+      - name: FK_TRAKING_NUMBER
+        description: Chave estrangeira que referencia o número de rastreamento do pedido.
+
+      - name: ORDER_DATE
+        description: Data em que o pedido foi realizado.
+
+      - name: DUE_DATE
+        description: Data de vencimento do pedido.
+
+      - name: SHIP_DATE
+        description: Data em que o pedido foi enviado.
+
+      - name: MODIFIED_DATE
+        description: Data da última modificação do registro do pedido.
+
+      - name: REVISION_NUMBER
+        description: Número da revisão do pedido.
+
+      - name: STATUS
+        description: Status atual do pedido (ex; Em processo, Aprovado, 
+                     Em falta, Rejeitado, Enviado, Cancelado).
+                     
+      - name: ORDER_FLG
+        description: Indicador de status do pedido (ex; ativo, inativo).
+
+      - name: PURCHASE_ORDER_NUMBER
+        description: Número do pedido de compra associado ao pedido.
+
+      - name: ACCOUNT_NUMBER
+        description: Número da conta associada ao cliente.
+
+      - name: CREDIT_CARD_APPROVAL_CODE
+        description: Código de aprovação do cartão de crédito utilizado na transação.
+
+      - name: COMMENT
+        description: Comentários adicionais sobre o pedido.
+
+      - name: GROSS_SUBTOTAL
+        description: Subtotal bruto do pedido antes de impostos e frete.
+
+      - name: NET_SUBTOTAL
+        description: Subtotal líquido do pedido após deduções.
+
+      - name: PRORATED_FREIGHT
+        description: Custo do frete proporcional ao pedido.
+
+      - name: PRORATED_TAX
+        description: Imposto proporcional aplicado ao pedido.

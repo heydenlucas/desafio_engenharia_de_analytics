@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: dim_clientes
+    description: Tabela dimensão que contém informações sobre os clientes.
+    columns:
+      - name: SK_CLIENT
+        description: Chave substituta única para cada cliente.
+        tests:
+          - unique
+          - not_null
+              
+      - name: PK_CLIENT
+        description: Chave primária do cliente, utilizada para identificação única.
+        
+      - name: FK_PERSON
+        description: Chave estrangeira que referencia a tabela de pessoas.
+      
+      - name: FK_STORE
+        description: Chave estrangeira que referencia a loja onde o cliente está associado.
+        
+      - name: FK_TERRITORY
+        description: Chave estrangeira que indica o território do cliente.
+        
+      - name: PERSON_NAME
+        description: Nome completo do cliente.
+        
+      - name: PERSON_TYPE
+        description: Tipo de pessoa (por exemplo, física ou jurídica).
+        
+      - name: STORE_NAME
+        description: Nome da loja associada ao cliente.
