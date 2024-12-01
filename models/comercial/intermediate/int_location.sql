@@ -32,6 +32,12 @@ with
             address.PK_ADDRESS
             , address.CITY
             , address.ADDRESS
+            , CASE 
+              WHEN POSITION(' ' IN address.ADDRESS) > 0 THEN 
+                    SUBSTR(address.ADDRESS, POSITION(' ' IN address.ADDRESS) + 1)
+              ELSE 
+                    NULL  -- ou você pode retornar ADDRESS se preferir
+              END AS neighborhood
             , address.POSTAL_CODE
             , state.STATE_NAME
             , country.COUNTRY_NAME

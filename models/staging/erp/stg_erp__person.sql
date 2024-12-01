@@ -5,7 +5,12 @@ with
             --########################################
             , cast(MODIFIEDDATE as date) as person_modified_date
             --########################################
-            , cast(PERSONTYPE as varchar) as person_type
+            --, cast(PERSONTYPE as varchar) as person_type
+            , case 
+                when PERSONTYPE = 'EM' then 'Employee'
+                when PERSONTYPE = 'SP' then 'Sales Person'
+                else PERSONTYPE
+              end as PERSON_TYPE
             , concat(
                 ifnull(concat(cast(FIRSTNAME as varchar),' '),'')
                 ,ifnull(concat(cast(MIDDLENAME as varchar),' '),'')

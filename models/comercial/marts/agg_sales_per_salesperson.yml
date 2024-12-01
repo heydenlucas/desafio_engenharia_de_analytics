@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: agg_sales_per_salesperson
+    description: "Dimensão que agrega as vendas por vendedor, incluindo detalhes sobre produtos, clientes e metas de vendas."
+    columns:
+      - name: PK_PERSON
+        description: "Chave primária que identifica o vendedor."
+        tests:
+          - not_null
+          - unique
+
+      - name: PERSON_TYPE
+        description: "Tipo de pessoa (nesse caso, todos da categoria 'Sales Person')."
+
+      - name: SALES_PERSON
+        description: "Nome do vendedor responsável pelas vendas."
+
+      - name: PRODUCT_QTY
+        description: "Quantidade total de produtos vendidos pelo vendedor."
+
+      - name: ORDER_QTY
+        description: "Quantidade total de pedidos realizados pelo vendedor."
+
+      - name: CLIENT_QTY
+        description: "Quantidade total de clientes atendidos pelo vendedor."
+
+      - name: TOTAL_PER_SALESPERSON
+        description: "Valor total das vendas realizadas pelo vendedor."
+
+      - name: SALES_GOAL
+        description: "Meta de vendas estabelecida para o vendedor."
+
+      - name: COMISSION_PERC
+        description: "Porcentagem de comissão que o vendedor recebe sobre as vendas."
+
+      - name: ACCUMULATED_SALES
+        description: "Total de vendas acumuladas pelo vendedor até o momento."
+
+      - name: LAST_YEAR_SALES
+        description: "Valor total das vendas do vendedor no ano anterior."
+
+      - name: AVERAGE_TICKET
+        description: "Valor médio de cada venda realizada pelo vendedor."

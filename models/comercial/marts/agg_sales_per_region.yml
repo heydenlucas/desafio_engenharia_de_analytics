@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: agg_sales_per_region
+    description: "Dimensão que agrega as vendas por região, incluindo bairro, estado, país e território."
+    columns:
+      - name: PK_SALESORDER
+        description: "Chave primária do pedido."
+        tests:
+          - not_null
+          - unique
+
+      - name: NEIGHBORHOOD
+        description: "Nome do bairro onde as vendas ocorreram."
+
+      - name: STATE_NAME
+        description: "Nome do estado onde as vendas ocorreram."
+
+      - name: COUNTRY_NAME
+        description: "Nome do país onde as vendas ocorreram."
+
+      - name: TERRITORY_NAME
+        description: "Nome do território onde as vendas ocorreram."
+
+      - name: total_sales_qty
+        description: "Quantidade total de pedidos agregados."
+
+      - name: total_sales_value
+        description: "Valor total das vendas agregadas."
