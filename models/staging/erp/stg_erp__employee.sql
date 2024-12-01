@@ -54,7 +54,7 @@ with
             , case
                 when employee.employee_gender = 'M' then 'Male'
                 when employee.employee_gender = 'F' then 'Female'
-                ELSE employee.employee_gender
+                ELSE 'Não-binário'
               end as gender
             , employee.employee_hire_date
             --############################################

@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: dim_employee
+    description: Tabela dimensão que contém informações sobre os funcionários.
+    columns:
+      - name: PK_STORE
+        description: Chave primária do funcionário, utilizada para identificação única.
+        tests:
+          - unique
+          - not_null
+
+      - name: EMPLOYEE_JOB_TITLE
+        description: Título do trabalho do funcionário, indicando sua posição na empresa.
+
+      - name: GENDER
+        description: Gênero do funcionário (por exemplo, Masculino, Feminino, Não-binário).
+
+      - name: EMPLOYEE_HIRE_DATE
+        description: Data em que o funcionário foi contratado.
+
+      - name: SHIFT
+        description: Turno de trabalho do funcionário (por exemplo, manhã, tarde, noite).

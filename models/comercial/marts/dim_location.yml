@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: dim_location
+    description: Tabela dimensão que contém informações sobre endereços de entrega.
+    columns:
+      - name: PK_SHIP_TO_ADDRESS
+        description: Chave primária do endereço de entrega, utilizada para identificação única.
+        tests:
+          - unique
+          - not_null
+
+      - name: CITY
+        description: Cidade do endereço de entrega.
+
+      - name: STATE
+        description: Estado do endereço de entrega.
+
+      - name: COUNTRY
+        description: País do endereço de entrega.
+
+      - name: POSTAL_CODE
+        description: Código postal do endereço de entrega.
+
+      - name: FULL_ADDRESS
+        description: Endereço completo, combinando cidade, estado, país e código postal.

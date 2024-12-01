@@ -2,7 +2,6 @@ with
     source_product as (
         select 
             cast(PRODUCTID as int) as pk_product
-            , cast(PRODUCTNUMBER as varchar) as pk_pd_number
             , cast(PRODUCTSUBCATEGORYID as varchar) as fk_subcategory
             , cast(PRODUCTMODELID as varchar) as fk_model            
             --##########################################
@@ -10,6 +9,7 @@ with
             , ifnull(cast(SELLSTARTDATE as date), NULL) as pruduct_start_sell_dt
             , ifnull(cast(SELLENDDATE as date), NULL) as pruduct_end_sell_dt
             --##########################################
+            , cast(PRODUCTNUMBER as varchar) as pd_number
             , cast(NAME as varchar) as product_name
             --##########################################
             -- , cast(ROWGUID as varchar) as

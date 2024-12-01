@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: dim_salesreason
+    description: Tabela que contém informações sobre razões de vendas e tipos de vendas agregados.
+    columns:
+      - name: SK_SALESREASON
+        description: Chave substituta para a razão de venda, utilizada para identificação única.
+        tests:
+          - unique
+          - not_null
+
+      - name: ID_SALESORDER
+        description: Identificador único do pedido de venda associado a uma razão de venda.
+
+      - name: AGG_SALESREASON
+        description: Razão de venda agregada, que pode ser usada para análise de vendas.
+
+      - name: AGG_SALESTYPE
+        description: Tipo de venda agregado, representando uma categorização adicional das vendas.

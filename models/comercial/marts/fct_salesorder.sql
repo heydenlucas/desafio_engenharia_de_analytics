@@ -1,5 +1,9 @@
 with 
-    creditcard as (
+    product as (
+        select *
+        from {{ ref('dim_product') }}
+    )
+    , creditcard as (
         select *
         from {{ ref('dim_creditcard') }}
     )
@@ -58,7 +62,7 @@ with
     )
     , client as (
         select 
-            SK_CLIENTE
+            SK_CLIENT
             , PK_CLIENT
             , FK_PERSON
             , FK_STORE
@@ -71,7 +75,7 @@ with
     , joined as (
         select 
               order_details.PK_ORDER_DETAIL
-            , order_details.fk_salesorder
+            , order_details.Fk_salesorder
             , order_details.FK_CUSTOMER
             , order_details.FK_SALES_PERSON
             , order_details.FK_TERRITORY
@@ -87,17 +91,17 @@ with
             , client.FK_STORE
             --#############################
             , order_details.ORDER_DATE
-            , order_details.DUE_DATE
+            -- , order_details.DUE_DATE
             , order_details.SHIP_DATE
-            , order_details.MODIFIED_DATE
+            -- , order_details.MODIFIED_DATE
             --#############################
-            , order_details.REVISION_NUMBER
-            , order_details.STATUS
-            , order_details.ORDER_FLG
-            , order_details.PURCHASE_ORDER_NUMBER
-            , order_details.ACCOUNT_NUMBER
-            , order_details.CREDIT_CARD_APPROVAL_CODE
-            , order_details.COMMENT
+            -- , order_details.REVISION_NUMBER
+            -- , order_details.STATUS
+            -- , order_details.ORDER_FLG
+            -- , order_details.PURCHASE_ORDER_NUMBER
+            -- , order_details.ACCOUNT_NUMBER
+            -- , order_details.CREDIT_CARD_APPROVAL_CODE
+            -- , order_details.COMMENT
             --############################
             -- Metrics
             , order_details.gross_subtotal

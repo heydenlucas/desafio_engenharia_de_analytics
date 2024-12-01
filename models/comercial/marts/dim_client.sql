@@ -25,7 +25,7 @@ with
 
     , joined as (
             select
-                {{ dbt_utils.generate_surrogate_key(['PK_CLIENT']) }} as sk_cliente
+                {{ dbt_utils.generate_surrogate_key(['PK_CLIENT']) }} as sk_client
                 , client.pk_client
                 , client.FK_PERSON
                 , client.FK_STORE
@@ -41,5 +41,6 @@ with
 
 select *
 from joined
+
 
 
