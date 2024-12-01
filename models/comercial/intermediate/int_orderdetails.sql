@@ -106,6 +106,9 @@ with
             , SHIP_DATE
             , MODIFIED_DATE
             --#############################
+            , ORDER_QUANTITY
+            , UNIT_PRICE
+            , UNIT_PRICE_DESC
             , REVISION_NUMBER
             , STATUS
             , ORDER_FLG
@@ -116,7 +119,7 @@ with
             --############################
             -- Metrics
             , (UNIT_PRICE * ORDER_QUANTITY) as gross_subtotal
-            , (UNIT_PRICE * ORDER_QUANTITY - (1-UNIT_PRICE_DESC)) as net_subtotal
+            , ((UNIT_PRICE * ORDER_QUANTITY ) * (1-UNIT_PRICE_DESC)) as net_subtotal
             , FREIGHT / (count(*) over(partition by fk_salesorder)) as prorated_freight
             , round(TAX_AMT * (gross_subtotal/subtotal),4) as prorated_tax
 
@@ -126,6 +129,8 @@ with
 
 select *
 from metrics
+
+
 
 -- select 
 --     pk_orderheader

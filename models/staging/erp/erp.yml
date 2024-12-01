@@ -27,5 +27,8 @@ sources:
       - name: Shift
       - name: EmployeeDepartmentHistory
       - name: Department 
+      - name: SalesPerson
+      - name: SalesTerritory
+
 
 
