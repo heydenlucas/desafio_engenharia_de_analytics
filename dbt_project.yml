@@ -1,8 +1,7 @@
-
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'my_new_project'
+name: 'desafio_ae_lucas_heyden' 
 version: '1.0.0'
 config-version: 2
 
@@ -10,7 +9,7 @@ config-version: 2
 profile: 'default'
 
 # These configurations specify where dbt should look for different types of files.
-# The `model-paths` config, for example, states that models in this project can be
+# The model-paths config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -20,7 +19,7 @@ macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
 target-path: "target"  # directory which will store compiled SQL files
-clean-targets:         # directories to be removed by `dbt clean`
+clean-targets:         # directories to be removed by dbt clean
   - "target"
   - "dbt_packages"
 
@@ -33,10 +32,14 @@ clean-targets:         # directories to be removed by `dbt clean`
 # The configuration below will override this setting for models in the example folder to 
 # instead be materialized as tables. Any models you add to the root of the models folder will 
 # continue to be built as views. These settings can be overridden in the individual model files
-# using the `{{ config(...) }}` macro.
+# using the {{ config(...) }} macro.
 
 models:
-  my_new_project:
-    # Applies to all files under models/example/
-    example:
-      +materialized: table
+  desafio_ae_lucas_heyden:
+    comercial:
+       marts:
+          +materialized: table
+       intermediate:
+          +materialized: view
+    staging:
+      +materialized: view
