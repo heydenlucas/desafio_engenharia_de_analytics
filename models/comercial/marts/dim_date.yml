@@ -2,24 +2,46 @@ version: 2
 
 models:
   - name: dim_date
-    description: Tabela dimensão que contém informações sobre datas e períodos.
+    description: "Date dimension, used for temporal analysis"
     columns:
-      - name: ORDER_DATE
-        description: Data do pedido, representando a data em que a transação ocorreu.
+      - name: RN
+        description: "Unique row identifier"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1]
+              severity: error
+
+      - name: DATE
+        description: "Date in YYYY-MM-DD format"
+        tests:
+          - not_null
+          - unique
+
+      - name: NORMALIZED_DATE
+        description: "Standardized representation of date by reference month for consistency between analyses."
+
+      - name: _DAY_
+        description: "Day of the month (1-31)"
         tests:
           - not_null
 
-      - name: _DAY_
-        description: O dia da data representada por ORDER_DATE.
-
       - name: _MONTH_
-        description: O mês da data representada por ORDER_DATE.
+        description: "Month of the year (1-12)"
+        tests:
+          - not_null
 
       - name: _YEAR_
-        description: O ano da data representada por ORDER_DATE.
+        description: "Year of the date"
+        tests:
+          - not_null
 
       - name: MONTH_NAME
-        description: Nome do mês correspondente à data (por exemplo, "Janeiro", "Fevereiro").
+        description: "Name of the month (e.g., January, February, etc.)"
+        tests:
+          - not_null
 
       - name: QUARTER
-        description: O trimestre do ano em que a data se encontra (1, 2, 3 ou 4).
+        description: "Quarter of the year (1-4)"
+        tests:
+          - not_null

@@ -1,5 +1,18 @@
 with
-    salesorderheader as (
+    product as (
+        select 
+            PK_PRODUCT
+            , FK_SUBCATEGORY
+            , FK_MODEL
+            , PRODUCT_MODIFIEDDATE
+            , PRUDUCT_START_SELL_DT
+            , PRUDUCT_END_SELL_DT
+            , PD_NUMBER
+            , PRODUCT_NAME
+        from {{ ref('stg_erp__product') }}
+    )
+
+    ,salesorderheader as (
         select 
             pk_salesorder
             , FK_CUSTOMER
@@ -76,11 +89,14 @@ with
             , salesorderdetail.FK_SPECIAL_OFFER
             , salesorderdetail.FK_TRAKING_NUMBER
             , salesorderdetail.MODIFIED_DATE
+            --##################################
+            , product.PRODUCT_NAME
             , salesorderdetail.ORDER_QUANTITY
             , salesorderdetail.UNIT_PRICE
             , salesorderdetail.UNIT_PRICE_DESC
         from salesorderdetail
         left join salesorderheader on salesorderheader.pk_salesorder = salesorderdetail.fk_salesorder
+        left join product on product.PK_PRODUCT = salesorderdetail.fk_product
     )
 
 
@@ -106,6 +122,7 @@ with
             , SHIP_DATE
             , MODIFIED_DATE
             --#############################
+            , PRODUCT_NAME
             , ORDER_QUANTITY
             , UNIT_PRICE
             , UNIT_PRICE_DESC

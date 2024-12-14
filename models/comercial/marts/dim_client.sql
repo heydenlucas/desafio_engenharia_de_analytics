@@ -9,7 +9,7 @@ with
     )
     , person as (
         select 
-            PK_PERSON
+            id_person_entity
             , PERSON_TYPE
             , PERSON_NAME
         from {{ ref('stg_erp__person') }}
@@ -35,12 +35,16 @@ with
                 , store.STORE_NAme
 
             from client
-            left join person on person.pk_person = client.fk_person
+            left join person on person.id_person_entity = client.pk_client
             left join store on store.pk_store = client.FK_STORE
     )
 
 select *
 from joined
+
+-- pk_client - 19820
+-- FK_PERSON - 19820
+-- where FK_PERSON = 15693
 
 
 

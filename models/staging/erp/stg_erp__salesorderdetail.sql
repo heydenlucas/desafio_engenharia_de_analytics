@@ -19,3 +19,4 @@ with
 
 select *
 from source_salesorderdetail
+-- where fk_salesorder = 62703

@@ -27,7 +27,7 @@ with
     )
     , person as (
         select 
-            PK_PERSON
+            id_person_entity
             , PERSON_MODIFIED_DATE
             , PERSON_TYPE
             , PERSON_NAME
@@ -48,7 +48,7 @@ with
     )
     , joined as (
         select 
-            prs.PK_PERSON
+            prs.id_person_entity
             , prs.PERSON_TYPE
             , prs.PERSON_NAME as sales_person
             , ssp.product_qty
@@ -63,7 +63,7 @@ with
             , ssp.average_ticket
         from salesperson as sp
         left join sales_salesperson as ssp on ssp.ID_sales_salesperson = sp.ID_SALESPERSON
-        left join person as prs on prs.PK_PERSON = sp.ID_SALESPERSON
+        left join person as prs on prs.id_person_entity = sp.ID_SALESPERSON
     )
 
 select *

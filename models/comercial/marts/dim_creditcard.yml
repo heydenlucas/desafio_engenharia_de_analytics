@@ -4,12 +4,6 @@ models:
   - name: dim_creditcard
     description: Tabela dimensão que contém informações sobre os cartões de crédito dos clientes.
     columns:
-      - name: SK_CREDITCARD
-        description: Chave substituta única para cada cartão de crédito.
-        tests:
-          - unique
-          - not_null
-
       - name: PK_CREDIT_CARD
         description: Chave primária do cartão de crédito, utilizada para identificação única.
         tests:
