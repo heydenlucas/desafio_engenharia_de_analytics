@@ -36,6 +36,7 @@ with
             , FK_PRODUCT
             , FK_SPECIAL_OFFER
             , FK_TRAKING_NUMBER
+            , PRODUCT_NAME
             , ORDER_DATE
             , DUE_DATE
             , SHIP_DATE
@@ -48,6 +49,7 @@ with
             , CREDIT_CARD_APPROVAL_CODE
             , COMMENT
             , ORDER_QUANTITY
+            , unit_price
             , GROSS_SUBTOTAL
             , NET_SUBTOTAL
             , PRORATED_FREIGHT
@@ -62,12 +64,15 @@ with
         select 
             ord.PK_SALESORDER
             , lc.NEIGHBORHOOD
+            , lc.CITY
             , lc.STATE_NAME
             , lc.COUNTRY_NAME
             , tr.TERRITORY_NAME
             , tr.ACCUMULATED_SALES
             , tr.LAST_YEAR_SALES
+            , od.PRODUCT_NAME
             , od.GROSS_SUBTOTAL
+            , od.unit_price
             , od.ORDER_QUANTITY
         from orders as ord
         left join orderdetails as od on ord.PK_SALESORDER = od.FK_SALESORDER
@@ -77,7 +82,7 @@ with
     , metricts as (
         select 
             PK_SALESORDER
-            , NEIGHBORHOOD
+            , city
             , STATE_NAME
             , COUNTRY_NAME
             , TERRITORY_NAME
@@ -85,11 +90,11 @@ with
             -- , LAST_YEAR_SALES
             , sum(ORDER_QUANTITY) as product_qty
             , count(PK_SALESORDER) as order_qty
-            , round(sum(GROSS_SUBTOTAL),2) as sales_value
+            , round(sum(ORDER_QUANTITY*unit_price),2) as sales_value
         from joined
         group by
             PK_SALESORDER
-            , NEIGHBORHOOD
+            , city
             , STATE_NAME
             , COUNTRY_NAME
             , TERRITORY_NAME
@@ -97,4 +102,5 @@ with
 
 select *
 from metricts
--- where PK_SALESORDER = 74554
+-- order by PK_SALESORDER desc
+-- where PK_SALESORDER = 62703

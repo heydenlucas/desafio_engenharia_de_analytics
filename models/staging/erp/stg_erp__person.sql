@@ -1,21 +1,25 @@
 with 
     source_person as(
         select 
-            cast(BUSINESSENTITYID as int) as pk_person
+            cast(BUSINESSENTITYID as int) as id_person_entity
             --########################################
             , cast(MODIFIEDDATE as date) as person_modified_date
             --########################################
             --, cast(PERSONTYPE as varchar) as person_type
             , case 
-                when PERSONTYPE = 'EM' then 'Employee'
-                when PERSONTYPE = 'SP' then 'Sales Person'
-                else PERSONTYPE
-              end as PERSON_TYPE
+              when persontype = 'SC' then 'Store' 
+                when persontype = 'IN' then 'Customer'
+                when persontype = 'SP' then 'Sales Person'
+                when persontype = 'EM' then 'Employee'
+                when persontype = 'VC' then 'Fornecedor'
+                when persontype = 'GC' then 'Contato Geral'
+                else null
+                end as person_type
             , concat(
                 ifnull(concat(cast(FIRSTNAME as varchar),' '),'')
                 ,ifnull(concat(cast(MIDDLENAME as varchar),' '),'')
                 ,ifnull(cast(LASTNAME as varchar),'')
-             ) as person_name      
+              ) as person_name      
             --###################################################
             --, cast(SUFFIX as varchar) as
             -- sufixo de vocativo (não será necessário)
@@ -40,3 +44,4 @@ with
 
 select *
 from source_person
+-- where pk_person = 15693

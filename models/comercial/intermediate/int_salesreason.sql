@@ -29,6 +29,7 @@ with
         from salesreason
         left join salesorderheadersalesreason 
             on salesreason.PK_SALESREASON = salesorderheadersalesreason.FK_SALESREASON
+        where salesorderheadersalesreason.FK_SALESORDER > 0
     )
     , agg_salesreason AS (
         SELECT 

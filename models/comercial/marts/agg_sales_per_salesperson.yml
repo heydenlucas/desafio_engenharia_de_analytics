@@ -4,7 +4,7 @@ models:
   - name: agg_sales_per_salesperson
     description: "Dimensão que agrega as vendas por vendedor, incluindo detalhes sobre produtos, clientes e metas de vendas."
     columns:
-      - name: PK_PERSON
+      - name: ID_PERSON_ENTITY
         description: "Chave primária que identifica o vendedor."
         tests:
           - not_null

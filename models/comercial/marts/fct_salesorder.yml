@@ -2,89 +2,109 @@ version: 2
 
 models:
   - name: fct_salesorder
-    description: Tabela fato que contém detalhes sobre pedidos de venda, incluindo informações sobre
-                clientes, produtos e transações.
+    description: Fact table that contains details about sales orders, including information about customers, products, and transactions.
     columns:
       - name: PK_ORDER_DETAIL
-        description: Chave primária que identifica de forma única cada detalhe do pedido.
+        description: Primary key that uniquely identifies each order detail.
         tests:
           - unique
           - not_null
 
       - name: FK_SALESORDER
-        description: Chave estrangeira que referencia o pedido de venda associado.
+        description: Foreign key that references the associated sales order.
 
       - name: FK_CUSTOMER
-        description: Chave estrangeira que referencia o cliente que fez o pedido.
+        description: Foreign key that references the customer who made the order.
 
       - name: FK_SALES_PERSON
-        description: Chave estrangeira que referencia o vendedor responsável pela venda.
+        description: Foreign key that references the salesperson responsible for the sale.
 
       - name: FK_TERRITORY
-        description: Chave estrangeira que referencia o território associado à venda.
+        description: Foreign key that references the territory associated with the sale.
 
       - name: FK_BILL_TO_ADDRESS
-        description: Chave estrangeira que referencia o endereço de cobrança do cliente.
+        description: Foreign key that references the customer's billing address.
 
       - name: FK_SHIP_TO_ADDRESS
-        description: Chave estrangeira que referencia o endereço de entrega do pedido.
+        description: Foreign key that references the shipping address for the order.
 
       - name: FK_SHIP_METHOD
-        description: Chave estrangeira que referencia o método de envio utilizado para o pedido.
+        description: Foreign key that references the shipping method used for the order.
 
       - name: FK_CREDIT_CARD
-        description: Chave estrangeira que referencia o cartão de crédito utilizado para o pagamento.
+        description: Foreign key that references the credit card used for payment.
 
       - name: FK_CURRENCY_RATED
-        description: Chave estrangeira que referencia a moeda utilizada na transação.
+        description: Foreign key that references the currency used in the transaction.
 
       - name: FK_PRODUCT
-        description: Chave estrangeira que referencia o produto associado ao pedido.
+        description: Foreign key that references the product associated with the order.
 
       - name: FK_SPECIAL_OFFER
-        description: Chave estrangeira que referencia uma oferta especial aplicada ao pedido.
+        description: Foreign key that references a special offer applied to the order.
 
       - name: FK_TRAKING_NUMBER
-        description: Chave estrangeira que referencia o número de rastreamento do pedido.
+        description: Foreign key that references the tracking number of the order.
 
       - name: FK_PERSON
-        description: Chave estrangeira que referencia a pessoa que fez o pedido.
+        description: Foreign key that references the person who placed the order.
 
       - name: FK_STORE
-        description: Chave estrangeira que referencia a loja onde o pedido foi realizado.
+        description: Foreign key that references the store where the order was placed.
 
       - name: ORDER_DATE
-        description: Data em que o pedido foi realizado.
+        description: Date the order was placed.
+
+      - name: NORMALIZED_DATE
+        description: Standardized representation of the order date.
 
       - name: SHIP_DATE
-        description: Data em que o pedido foi enviado.
+        description: Date the order was shipped.
+
+      - name: STATUS
+        description: Current status of the order (e.g., Shipped, Cancelled).
+
+      - name: ORDER_QUANTITY
+        description: Quantity of items in the order.
+
+      - name: UNIT_PRICE
+        description: Unit price of each product in the order.
+
+      - name: UNIT_PRICE_DESC
+        description: Description of the unit price applied to the order.
+
+      - name: STORE_KIND
+        description: Type of store where the order was placed.
 
       - name: GROSS_SUBTOTAL
-        description: Subtotal bruto do pedido antes de impostos e frete.
+        description: Gross subtotal of the order before taxes and shipping.
 
       - name: NET_SUBTOTAL
-        description: Subtotal líquido do pedido após deduções.
+        description: Net subtotal of the order after deductions.
 
       - name: PRORATED_FREIGHT
-        description: Custo do frete proporcional ao pedido.
+        description: Shipping cost proportional to the order.
 
       - name: PRORATED_TAX
-        description: Imposto proporcional aplicado ao pedido.
+        description: Tax proportional to the order.
 
       - name: AGG_SALESREASON
-        description: Razões da venda agregadas que são associadas ao pedido.
+        description: Aggregated sales reasons associated with the order.
 
       - name: AGG_SALESTYPE
-        description: Tipos da venda agregados que são associados ao pedido.
+        description: Aggregated sales types associated with the order.
+
+      - name: CARD_TYPE
+        description: Type of card used in the transaction.
 
       - name: PERSON_NAME
-        description: Nome da pessoa que fez o pedido.
+        description: Name of the person who placed the order.
 
       - name: PERSON_TYPE
-        description: Tipo da pessoa que fez o pedido (exemplo; cliente, funcionário).
+        description: Type of person who placed the order (e.g., customer, employee).
 
       - name: STORE_NAME
-        description: Nome da loja onde o pedido foi realizado.
+        description: Name of the store where the order was placed.
 
       - name: FULL_ADDRESS
-        description: Endereço completo do cliente.
+        description: Full address of the customer.

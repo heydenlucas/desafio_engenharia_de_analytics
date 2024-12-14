@@ -2,8 +2,7 @@ version: 2
 
 models:
   - name: int_orderdetails
-    description: Tabela de intermediária de detalhes do pedido que contém
-                 informações sobre cada item em um pedido de venda.
+    description: Tabela intermediária de detalhes do pedido que contém informações sobre cada item em um pedido de venda.
     columns:
       - name: PK_ORDER_DETAIL
         description: Chave primária que identifica de forma única cada parte do pedido.
@@ -59,13 +58,24 @@ models:
       - name: MODIFIED_DATE
         description: Data da última modificação do registro do pedido.
 
+      - name: PRODUCT_NAME
+        description: Nome do produto associado ao pedido.
+
+      - name: ORDER_QUANTITY
+        description: Quantidade de itens solicitados no pedido.
+
+      - name: UNIT_PRICE
+        description: Preço unitário do item no pedido.
+
+      - name: UNIT_PRICE_DESC
+        description: Desconto aplicado ao preço unitário do item.
+
       - name: REVISION_NUMBER
         description: Número da revisão do pedido.
 
       - name: STATUS
-        description: Status atual do pedido (ex; Em processo, Aprovado, 
-                     Em falta, Rejeitado, Enviado, Cancelado).
-                     
+        description: Status atual do pedido (ex; Em processo, Aprovado, Em falta, Rejeitado, Enviado, Cancelado).
+
       - name: ORDER_FLG
         description: Indicador de status do pedido (ex; ativo, inativo).
 

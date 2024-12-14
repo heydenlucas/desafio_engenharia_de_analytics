@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: dim_clientes
+  - name: dim_client
     description: Tabela dimensão que contém informações sobre os clientes.
     columns:
       - name: SK_CLIENT
