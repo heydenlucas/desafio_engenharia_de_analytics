@@ -29,5 +29,5 @@ Below is an image illustrating the project pipeline as a whole. To represent the
 ## Project Results
 - [**Conceptual Model**](https://github.com/user-attachments/files/18137872/conceptual_model_adventure_works.pdf): A conceptual model was created based on the OLTP, serving as a guide for the project and a translation of the data processing steps.
 - [**Semantic Model**](https://github.com/user-attachments/files/18137871/semantic_model_adventure_works.pdf): To illustrate the outcome structured by the conceptual model, a PDF of the semantic model was provided. It shows the relationships between tables in Power BI after the data was processed in dbt.
-- [**Dashboard**](https://drive.google.com/file/d/1GT24C4IE9hPZpaM2MdnL8Xc_x_0ydxIn/view?usp=sharing): The main deliverable of the project, a data product that the company will use to monitor key KPIs, supporting data-driven decision-making.
+- [**Dashboard**](https://drive.google.com/file/d/1YPZHDQjyGsywaVHK48Cbvits8bnTWa43/view?usp=sharing): The main deliverable of the project, a data product that the company will use to monitor key KPIs, supporting data-driven decision-making.
 - [**Explanatory Video**](https://youtu.be/xw66bZl_crg): An explanatory video was provided to present how the project was developed, the tests conducted during processing, and how to use the BI tool.
